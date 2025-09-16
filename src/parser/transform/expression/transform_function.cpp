@@ -136,7 +136,7 @@ bool Transformer::ExpressionIsEmptyStar(ParsedExpression &expr) {
 		return false;
 	}
 	auto &star = expr.Cast<StarExpression>();
-	if (!star.columns && star.exclude_list.empty() && star.replace_list.empty()) {
+	if (!star.columns && star.exclude_list.empty() && star.replace_list.empty() && star.relation_name.empty()) {
 		return true;
 	}
 	return false;
