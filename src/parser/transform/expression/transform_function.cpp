@@ -8,6 +8,7 @@
 #include "duckdb/parser/expression/star_expression.hpp"
 #include "duckdb/parser/expression/window_expression.hpp"
 #include "duckdb/parser/transformer.hpp"
+#include <iostream>
 
 namespace duckdb {
 
@@ -136,6 +137,7 @@ bool Transformer::ExpressionIsEmptyStar(ParsedExpression &expr) {
 		return false;
 	}
 	auto &star = expr.Cast<StarExpression>();
+	std::cout << "FIX: current_star.relation_name - " << star.relation_name << std::endl;
 	if (!star.columns && star.exclude_list.empty() && star.replace_list.empty() && star.relation_name.empty()) {
 		return true;
 	}

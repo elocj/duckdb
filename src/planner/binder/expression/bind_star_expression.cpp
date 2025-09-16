@@ -8,6 +8,7 @@
 #include "duckdb/execution/expression_executor.hpp"
 #include "duckdb/function/scalar/regexp.hpp"
 #include "duckdb/parser/expression/function_expression.hpp"
+#include <iostream>
 
 namespace duckdb {
 
@@ -35,6 +36,7 @@ StarExpressionType Binder::FindStarExpression(unique_ptr<ParsedExpression> &expr
 	if (expr->GetExpressionClass() == ExpressionClass::STAR) {
 		auto &current_star = expr->Cast<StarExpression>();
 		if (StarExpression::IsStar(*expr)) {
+			std::cout << "FIX: Is root - " << is_root << ", In columns - " << in_columns << std::endl;
 			if (is_root) {
 				D_ASSERT(!in_columns);
 				// At the root level

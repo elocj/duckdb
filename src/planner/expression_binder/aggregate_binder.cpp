@@ -1,6 +1,7 @@
 #include "duckdb/planner/expression_binder/aggregate_binder.hpp"
 
 #include "duckdb/planner/binder.hpp"
+#include <iostream>
 
 namespace duckdb {
 
@@ -9,6 +10,7 @@ AggregateBinder::AggregateBinder(Binder &binder, ClientContext &context) : Expre
 
 BindResult AggregateBinder::BindExpression(unique_ptr<ParsedExpression> &expr_ptr, idx_t depth, bool root_expression) {
 	auto &expr = *expr_ptr;
+	std::cout << "FIX: Expr - " << expr.ToString() << std::endl;
 	switch (expr.GetExpressionClass()) {
 	case ExpressionClass::WINDOW:
 		throw BinderException::Unsupported(expr, "aggregate function calls cannot contain window function calls");
